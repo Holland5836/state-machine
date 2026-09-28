@@ -48,3 +48,10 @@ A state that appears nowhere as a key in the transition table has no outgoing ed
 - `history` — an array of every state the machine has entered, starting with the initial state
 - `initial` — the configured initial state
 - `transitions` — the configured transition table
+
+## Design notes
+
+The window stores values eagerly rather than keeping running aggregates. Running
+sums drift with floating point over long streams, and recomputing from a small
+buffer is cheap enough that the drift is not worth the speed.
+
